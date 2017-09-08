@@ -1,53 +1,56 @@
-const stdin = process.openStdin();
-
 const vocabulary = ['woof']
-
 const output = {
   greeting: 'Dog is standing by! Type something and press ENTER key.' +
     '\nType `bye` or `CTRL+D` when you are done chatting.' +
     '\n',
-  salutation: `\rDog: *waves goodbye*` + 
+  salutation: `\rDog: *waves goodbye*` +
     '\n\nYour session has ended. Thank you for chatting with Dog.' +
     '\n',
   busy: 'Dog is typing...',
-  response: `\rDog: ${vocabulary[0]}` +
+  responseTemplate: `\rDog: ${vocabulary[0]}` +
     '\n',
 }
-
-let timer = null
+const defaultResponseDelay = 1000
+let timers = []
 
 const init = () => {
   console.clear()
   write(output.greeting)
   renderPrompt()
-  handleInput()
-}
-
-const handleInput = () => {
-  stdin.on('data', (chunk) => { 
-    isExitSequence(chunk) && exit()
-    write(output.busy)
-    timer = setTimeout(respond, 1000)
-  })
-}
-
-const exit = () => {
-  timer = setTimeout(() => {
-    write(output.salutation)
-    process.exit()
-  }, 1000)
+  process.openStdin().on('data', handleInput)
 }
 
 const renderPrompt = () => write('\n> ')
 
+const renderResponse = () => write(output.responseTemplate)
+
+const handleInput = (chunk) => {
+  write(output.busy)
+  if (isExitSequence(chunk)) return handleExitSequence()
+  timers.push(setTimeout(respond, defaultResponseDelay))
+}
+
+const isExitSequence = chunk => chunk.toString('utf8').match(/bye\.*\n$/i)
+
+const write = str => process.stdout.write(str)
+
 const respond = (chunk) => {
   process.stdout.clearLine()
-  write(output.response)
+  renderResponse()
   renderPrompt()
 }
 
-const write = (str) => process.stdout.write(str)
+const handleExitSequence = () => {
+  timers.push(
+    setTimeout(() => write(output.salutation), defaultResponseDelay),
+    setTimeout(() => process.exit(), defaultResponseDelay),
+  )
+}
 
-const isExitSequence = (chunk) => chunk.toString('utf8').match(/^bye\n$/i)
+const clearTimer = () => {
+  typeof timers === 'array' && timers.forEach(timer => clearTimeout(timer))
+}
 
-init()
+module.exports = {
+  DogChat: init,
+}

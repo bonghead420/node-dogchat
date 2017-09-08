@@ -2,10 +2,9 @@
   "name": "dogchat",
   "version": "1.0.0",
   "description": "Chat with a dog!",
-  "main": "dogchat.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dogchat"
+    "start": "node index"
   },
   "repository": {
     "type": "git",
@@ -18,6 +17,11 @@
   },
   "homepage": "https://github.com/bonghead420/dogchat#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
     "jest": "^21.0.1"
+  },
+  "babel": {
+    "presets": ["es2015"]
   }
 }
