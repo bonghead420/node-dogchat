@@ -4,7 +4,8 @@
   "description": "Chat with a dog!",
   "main": "dogchat.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dogchat"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/bonghead420/dogchat/issues"
   },
-  "homepage": "https://github.com/bonghead420/dogchat#readme"
+  "homepage": "https://github.com/bonghead420/dogchat#readme",
+  "devDependencies": {
+    "jest": "^21.0.1"
+  }
 }
