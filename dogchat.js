@@ -1,7 +1,7 @@
 const vocabulary = ['woof']
 const output = {
   greeting: 'Dog is standing by! Type something and press ENTER key.' +
-    '\nType `bye` or `CTRL+D` when you are done chatting.' +
+    '\nType `goodbye` when you are finished chatting' +
     '\n',
   salutation: `\rDog: *waves goodbye*` +
     '\n\nYour session has ended. Thank you for chatting with Dog.' +
@@ -13,7 +13,7 @@ const output = {
 const defaultResponseDelay = 1000
 let timers = []
 
-const init = () => {
+const initialize = () => {
   console.clear()
   write(output.greeting)
   renderPrompt()
@@ -24,13 +24,15 @@ const renderPrompt = () => write('\n> ')
 
 const renderResponse = () => write(output.responseTemplate)
 
-const handleInput = (chunk) => {
+const handleInput = chunk => {
+  if (isExitSequence(chunk)) {
+    return handleExitSequence()
+  }
   write(output.busy)
-  if (isExitSequence(chunk)) return handleExitSequence()
   timers.push(setTimeout(respond, defaultResponseDelay))
 }
 
-const isExitSequence = chunk => chunk.toString('utf8').match(/bye\.*\n$/i)
+const isExitSequence = chunk => chunk.toString('utf8').match(/^goodbye\.*\n$/i)
 
 const write = str => process.stdout.write(str)
 
@@ -52,5 +54,5 @@ const clearTimer = () => {
 }
 
 module.exports = {
-  DogChat: init,
+  DogChat: initialize,
 }

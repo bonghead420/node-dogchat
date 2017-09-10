@@ -22,6 +22,9 @@
     "jest": "^21.0.1"
   },
   "babel": {
-    "presets": ["es2015"]
-  }
+    "presets": [
+      "es2015"
+    ]
+  },
+  "dependencies": {}
 }
