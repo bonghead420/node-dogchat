@@ -1,15 +1,5 @@
-const vocabulary = ['woof']
-const output = {
-  greeting: 'Dog is standing by! Type something and press ENTER key.' +
-    '\nType `goodbye` when you are finished chatting' +
-    '\n',
-  salutation: `\rDog: *waves goodbye*` +
-    '\n\nYour session has ended. Thank you for chatting with Dog.' +
-    '\n',
-  busy: 'Dog is typing...',
-  responseTemplate: `\rDog: ${vocabulary[0]}` +
-    '\n',
-}
+'use strict'
+const {output} = require('./output')
 const defaultResponseDelay = 1000
 let timers = []
 
@@ -47,10 +37,6 @@ const handleExitSequence = () => {
     setTimeout(() => write(output.salutation), defaultResponseDelay),
     setTimeout(() => process.exit(), defaultResponseDelay),
   )
-}
-
-const clearTimer = () => {
-  typeof timers === 'array' && timers.forEach(timer => clearTimeout(timer))
 }
 
 module.exports = {
