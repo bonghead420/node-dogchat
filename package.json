@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Chat with a dog!",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "test": "jest",
+    "start": "node index",
+    "lint": "eslint .",
+    "precommit": "eslint && jest",
+    "prepush": "eslint && jest"
   },
   "repository": {
     "type": "git",
@@ -18,13 +21,19 @@
   "homepage": "https://github.com/bonghead420/dogchat#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-jest": "^21.0.2",
     "babel-preset-env": "^1.6.0",
-    "jest": "^21.0.1"
+    "babel-preset-es2015": "^6.24.1",
+    "husky": "^0.14.3",
+    "jest": "^21.1.0",
+    "regenerator-runtime": "^0.11.0"
   },
   "babel": {
     "presets": [
       "es2015"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "eslint": "^4.6.1"
+  }
 }

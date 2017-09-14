@@ -4,7 +4,7 @@ const output = {
   greeting: 'Dog is standing by! Type something and press ENTER key.' +
     '\nType `goodbye` when you are finished chatting' +
     '\n',
-  salutation: `\rDog: *waves goodbye*` +
+  salutation: '\rDog: *waves goodbye*' +
     '\n\nYour session has ended. Thank you for chatting with Dog.' +
     '\n',
   busy: 'Dog is typing...',

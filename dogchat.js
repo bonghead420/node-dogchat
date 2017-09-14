@@ -4,7 +4,7 @@ const defaultResponseDelay = 1000
 let timers = []
 
 const initialize = () => {
-  console.clear()
+  console.clear() // eslint-disable-line no-console
   write(output.greeting)
   renderPrompt()
   process.openStdin().on('data', handleInput)
@@ -23,10 +23,12 @@ const handleInput = chunk => {
 }
 
 const isExitSequence = chunk => chunk.toString('utf8').match(/^goodbye\.*\n$/i)
+  ? true
+  : false
 
 const write = str => process.stdout.write(str)
 
-const respond = (chunk) => {
+const respond = () => {
   process.stdout.clearLine()
   renderResponse()
   renderPrompt()
@@ -34,11 +36,15 @@ const respond = (chunk) => {
 
 const handleExitSequence = () => {
   timers.push(
-    setTimeout(() => write(output.salutation), defaultResponseDelay),
-    setTimeout(() => process.exit(), defaultResponseDelay),
+    setTimeout(() => {
+      write(output.salutation)
+      process.exit()
+    }, defaultResponseDelay)
   )
 }
 
 module.exports = {
   DogChat: initialize,
+  write,
+  isExitSequence,
 }
