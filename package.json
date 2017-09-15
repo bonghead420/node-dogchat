@@ -6,8 +6,8 @@
     "test": "jest",
     "start": "node index",
     "lint": "eslint .",
-    "precommit": "eslint && jest",
-    "prepush": "eslint && jest"
+    "precommit": "eslint . && jest",
+    "prepush": "eslint . && jest"
   },
   "repository": {
     "type": "git",

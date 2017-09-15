@@ -47,4 +47,5 @@ module.exports = {
   DogChat: initialize,
   write,
   isExitSequence,
+  handleInput,
 }
