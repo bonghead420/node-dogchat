@@ -1,5 +1,5 @@
 'use strict'
-const {output} = require('./output')
+const {output, speak} = require('./dog')
 const defaultResponseDelay = 1000
 let timers = []
 
@@ -12,7 +12,7 @@ const initialize = () => {
 
 const renderPrompt = () => write('\n> ')
 
-const renderResponse = () => write(output.responseTemplate)
+const renderResponse = () => write(speak())
 
 const handleInput = chunk => {
   if (isExitSequence(chunk)) {

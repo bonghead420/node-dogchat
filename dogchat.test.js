@@ -1,6 +1,6 @@
 import {
   output
-} from './output'
+} from './dog'
 import {
   write,
   isExitSequence,
@@ -24,7 +24,7 @@ test('handleInput calls isExitSequence', () => {
   const isExitSequence = jest.fn()
   handleInput(Buffer.from(''))
   setTimeout(() => {
-    expect(isExitSequence.mock).toBe(1)
+    expect(isExitSequence.mock.calls.length).toBe(1)
   }, 20)
 })
 

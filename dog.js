@@ -1,5 +1,10 @@
 const vocabulary = ['woof']
 
+const speak = () => {
+  const words = Array.from(Array(Math.ceil(Math.random() * 8)).keys())
+  return `\rDog: ${words.map(() => vocabulary[0]).join(' ')}\n`
+}
+
 const output = {
   greeting: 'Dog is standing by! Type something and press ENTER key.' +
     '\nType `goodbye` when you are finished chatting' +
@@ -8,8 +13,6 @@ const output = {
     '\n\nYour session has ended. Thank you for chatting with Dog.' +
     '\n',
   busy: 'Dog is typing...',
-  responseTemplate: `\rDog: ${vocabulary[0]}` +
-    '\n',
 }
 
-module.exports = {output}
+module.exports = {output, speak}
