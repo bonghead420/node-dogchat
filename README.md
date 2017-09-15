@@ -1,10 +1,12 @@
 # DogChat
 
-#### Installation and usage
+#### Installation
 ```
-git clone git@github.com:bonghead420/dogchat.git
-cd dogchat
 npm install
+```
+
+#### Usage
+```
 npm start
 ```
 
