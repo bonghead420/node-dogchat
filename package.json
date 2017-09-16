@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bonghead420/dogchat.git"
+    "url": "https://github.com/bonghead420/node-dogchat.git"
   },
   "author": "BongHead420",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bonghead420/dogchat/issues"
+    "url": "https://github.com/bonghead420/node-dogchat/issues"
   },
-  "homepage": "https://github.com/bonghead420/dogchat#readme",
+  "homepage": "https://github.com/bonghead420/node-dogchat#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-jest": "^21.0.2",
