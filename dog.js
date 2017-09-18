@@ -1,10 +1,5 @@
 const vocabulary = ['woof']
 
-const speak = () => {
-  const words = Array.from(Array(Math.ceil(Math.random() * 8)).keys())
-  return `\rDog: ${words.map(() => vocabulary[0]).join(' ')}\n`
-}
-
 const output = {
   greeting: 'Dog is standing by! Type something and press ENTER key.' +
     '\nType `goodbye` when you are finished chatting' +
@@ -15,4 +10,16 @@ const output = {
   busy: 'Dog is typing...',
 }
 
-module.exports = {output, speak}
+class Dog {
+  constructor() {
+    this.vocabulary = vocabulary
+    this.output = output
+  }
+
+  speak() {
+    const words = Array.from(Array(Math.ceil(Math.random() * 8)).keys())
+    return `\rDog: ${words.map(() => this.vocabulary[0]).join(' ')}\n`
+  }
+}
+
+module.exports = Dog

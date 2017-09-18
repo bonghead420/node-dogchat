@@ -10,5 +10,10 @@ npm install
 npm start
 ```
 
+#### Testing
+```
+npm run lint && npm run test
+```
+
 #### License
 MIT
