@@ -1,6 +1,7 @@
 const Chat = require('./Chat')
 const Dog = require('./Dog')
 
-new Chat(new Dog(), {
-  delay: 1000
+new Chat({
+  bot: new Dog(),
+  delay: 1000,
 })

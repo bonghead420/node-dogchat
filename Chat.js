@@ -1,10 +1,14 @@
 'use strict'
 
 class Chat {
-  constructor(thing, config) {
+  constructor(config) {
     this.config = config
-    this.thing = thing
+    this.bot = config.bot
     this.timers = []
+    this.messages = {
+      user: [],
+      bot: [],
+    }
     if (!this.config.test) {
       console.clear() // eslint-disable-line no-console
       process.openStdin().on('data', this.handleInput.bind(this))
@@ -13,7 +17,7 @@ class Chat {
   }
 
   render() {
-    this.write(this.thing.output.greeting)
+    this.write(this.bot.output.greeting)
     this.renderPrompt()
   }
 
@@ -22,20 +26,35 @@ class Chat {
   }
 
   renderResponse() {
-    this.write(this.thing.speak())
+    const response = this.bot.speak()
+    this.saveMessage('bot', response)
+    this.write(response)
   }
 
-  isExitSequence(chunk) {
-    return chunk.toString('utf8').match(/^goodbye\.*\n$/i)
+  isExitSequence(str) {
+    return str.match(/^goodbye\.*$/i)
       ? true
       : false
   }
 
+  getStringFromChunk(chunk) {
+    return chunk.toString('utf8').replace(/\n*$/, '')
+  }
+
+  saveMessage(key, str) {
+    this.messages[key].push({
+      timestamp: Date.now(),
+      message: str,
+    })
+  }
+
   handleInput(chunk) {
-    if (this.isExitSequence(chunk)) {
+    const input = this.getStringFromChunk(chunk)
+    this.saveMessage('user', input)
+    if (this.isExitSequence(input)) {
       return this.handleExitSequence()
     }
-    this.write(this.thing.output.busy)
+    this.write(this.bot.output.busy)
     this.timers.push(setTimeout(
       this.respond.bind(this),
       this.config.delay)
@@ -55,7 +74,7 @@ class Chat {
   handleExitSequence() {
     this.timers.push(
       setTimeout(() => {
-        this.write(this.thing.output.salutation)
+        this.write(this.bot.output.salutation)
         process.exit()
       }, this.config.delay)
     )
