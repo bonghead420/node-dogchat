@@ -1,5 +1,7 @@
 # DogChat
 
+![DogChat](https://media.giphy.com/media/3ohhwy9yIbjpH7CnsY/giphy.gif)
+
 #### Installation
 ```
 npm install
